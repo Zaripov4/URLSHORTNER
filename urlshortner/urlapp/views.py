@@ -11,7 +11,7 @@ def index(request):
 def add(request):
     if request.method == 'POST':
         link = request.POST['link']
-        link_id = str(uuid.uuid4())[:8]
+        link_id = str(uuid.uuid4())[:6]
         new_link = LinkInfo(link=link, link_id=link_id)
         new_link.save()
         return HttpResponse(link_id)
