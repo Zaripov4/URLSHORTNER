@@ -25,7 +25,7 @@ SECRET_KEY = '7suk-ut0yzhq+j#6&_4o#*i35y*9n_d!9!py!k#u*5z(67&mm&'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -120,4 +120,3 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-ALLOWED_HOSTS = ['*']

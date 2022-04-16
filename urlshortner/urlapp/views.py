@@ -20,3 +20,8 @@ def add(request):
 def shorten(request, pk):
     link_id = LinkInfo.objects.get(link_id=pk)
     return redirect(link_id.link)
+
+
+# def deleted_at(request):
+#     if request.method == 'POST':
+#         datetime =

@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from django.db import models
 
 
@@ -7,3 +9,13 @@ class LinkInfo(models.Model):
 
     def __str__(self):
         return self.link_id
+
+
+def get_expire_date():
+    return datetime.now() + timedelta(days=30)
+
+
+class ExpireDate(models.Model):
+    expire_date = models.DateTimeField(default=get_expire_date)
+
+
