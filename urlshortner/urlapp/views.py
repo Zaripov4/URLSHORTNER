@@ -1,8 +1,8 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 import uuid
 from .models import LinkInfo
 from django.http import HttpResponse
-
+from django_user_agents.utils import get_user_agent
 
 def index(request):
     return render(request, 'index.html', {})
@@ -11,17 +11,22 @@ def index(request):
 def add(request):
     if request.method == 'POST':
         link = request.POST['link']
-        link_id = str(uuid.uuid4())[:6]
-        new_link = LinkInfo(link=link, link_id=link_id)
+        short_link = str(uuid.uuid4())[:6]
+        new_link = LinkInfo(link=link, short_link=short_link)
         new_link.save()
-        return HttpResponse(link_id)
+        return HttpResponse(short_link)
 
 
 def shorten(request, pk):
-    link_id = LinkInfo.objects.get(link_id=pk)
-    return redirect(link_id.link)
+    print(request.user)
+    print('**************')
+    short_link = get_object_or_404(LinkInfo, short_link=pk)
+    return redirect(short_link.link)
 
 
-# def deleted_at(request):
-#     if request.method == 'POST':
-#         datetime =
+def my_view(request):
+    user_agents = get_user_agent(request)
+    if user_agents.is_mobile:
+        return "mobile user"
+    elif user_agents.is_pc:
+        return "Pc user"

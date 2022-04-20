@@ -1,21 +1,22 @@
-from datetime import datetime
+import uuid
+from datetime import datetime, timedelta
 
 from django.db import models
-
-
-class LinkInfo(models.Model):
-    link = models.CharField(max_length=10000)
-    link_id = models.CharField(max_length=8)
-
-    def __str__(self):
-        return self.link_id
 
 
 def get_expire_date():
     return datetime.now() + timedelta(days=30)
 
 
-class ExpireDate(models.Model):
+def get_short():
+    return str(uuid.uuid4())[:8]
+
+
+class LinkInfo(models.Model):
+    link = models.URLField(max_length=10000)
+    short_link = models.CharField(max_length=8, default=get_short)
     expire_date = models.DateTimeField(default=get_expire_date)
 
+    def __str__(self):
+        return self.short_link
 
