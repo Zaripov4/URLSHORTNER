@@ -1,6 +1,5 @@
 import uuid
 from datetime import datetime, timedelta
-
 from django.db import models
 
 
@@ -19,4 +18,3 @@ class LinkInfo(models.Model):
 
     def __str__(self):
         return self.short_link
-

@@ -4,6 +4,7 @@ from .models import LinkInfo
 from django.http import HttpResponse
 from django_user_agents.utils import get_user_agent
 
+
 def index(request):
     return render(request, 'index.html', {})
 
